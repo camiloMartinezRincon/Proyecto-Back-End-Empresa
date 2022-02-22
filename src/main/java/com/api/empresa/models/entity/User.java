@@ -12,8 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -35,12 +38,14 @@ public class User implements Serializable {
 
 	@NotEmpty(message = "No puede estar Vacio")
 	@Email(message = "Formato de Email incorrecto")
-	@Column(name = "corp_user_email", nullable = false)
+	@Column(name = "corp_user_email", nullable = false, unique = true)
 	private String corpUserEmail;
 
 	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "user_password", nullable = false)
 	private String userPassword;
+	
+	private Boolean enabled;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
@@ -50,8 +55,12 @@ public class User implements Serializable {
 	@JoinColumn(name = "user_id")
 	private List<ProjectDelivery> projectDeliveries;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Project> projects;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"), uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})})
+	private List<Role> roles;
 
 	public User() {
 		this.requirements = new ArrayList<>();
@@ -121,6 +130,22 @@ public class User implements Serializable {
 
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	/**

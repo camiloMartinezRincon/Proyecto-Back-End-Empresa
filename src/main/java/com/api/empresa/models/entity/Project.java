@@ -2,7 +2,6 @@ package com.api.empresa.models.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -48,13 +47,11 @@ public class Project implements Serializable {
 	@Column(name = "client_email", nullable = false)
 	private String clientEmail;
 
-	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "start_date", nullable = false)
-	private Date startDate;
+	private String startDate;
 
-	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "end_date", nullable = false)
-	private Date endDate;
+	private String endDate;
 
 	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "project_description", nullable = false)
@@ -124,22 +121,6 @@ public class Project implements Serializable {
 		this.clientEmail = clientEmail;
 	}
 
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
 	public String getProjectDescription() {
 		return projectDescription;
 	}
@@ -171,6 +152,23 @@ public class Project implements Serializable {
 	public void setProjectDeliveries(List<ProjectDelivery> projectDeliveries) {
 		this.projectDeliveries = projectDeliveries;
 	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
 
 	/**
 	 * Serial Version
