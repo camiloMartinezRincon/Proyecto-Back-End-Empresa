@@ -10,10 +10,13 @@ import com.api.empresa.models.dao.IProjectDeliveryDao;
 import com.api.empresa.models.entity.ProjectDelivery;
 
 @Service
-public class ProjectDeliveryServiceImpl implements IProjectDeliveryService{
+public class ProjectDeliveryServiceImpl implements IProjectDeliveryService {
 
 	@Autowired
 	private IProjectDeliveryDao projectDeliveryDao;
+
+	@Autowired
+	private EmailSenderService emailService;
 	
 	@Override
 	@Transactional
@@ -30,7 +33,13 @@ public class ProjectDeliveryServiceImpl implements IProjectDeliveryService{
 	@Override
 	@Transactional
 	public ProjectDelivery save(ProjectDelivery projectDelivery) {
-		return projectDeliveryDao.save(projectDelivery);
+		ProjectDelivery projectCreated = new ProjectDelivery();
+		projectCreated = projectDeliveryDao.save(projectDelivery);
+		if(projectCreated.getProjectDeliveryId()!= null){
+			this.emailService.sendProjectDeliveryMail(projectDelivery);
+
+		}
+		return null;
 	}
 
 	@Override

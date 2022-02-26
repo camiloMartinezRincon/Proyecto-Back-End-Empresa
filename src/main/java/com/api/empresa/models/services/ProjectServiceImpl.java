@@ -36,7 +36,8 @@ public class ProjectServiceImpl implements IProjectService{
 	@Override
 	@Transactional
 	public void delete(Long projectId) {
-		projectDao.deleteById(projectId);
+		Project projectToDelete = this.findById(projectId);
+		projectDao.delete(projectToDelete);
 	}
 
 }

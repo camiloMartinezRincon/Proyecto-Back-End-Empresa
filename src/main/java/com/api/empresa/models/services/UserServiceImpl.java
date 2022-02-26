@@ -32,4 +32,15 @@ public class UserServiceImpl implements IUserService{
 		userDao.deleteById(userId);
 	}
 
+	@java.lang.Override
+	public String authenticate(String corpUserEmail, String userPassword) {
+		User authenticatedUser = new User();
+		authenticatedUser = userDao.findByCorpUserEmail(corpUserEmail);
+		if(userPassword.equals(authenticatedUser.getUserPassword())){
+			return "Correct";
+		}else{
+			return "Incorrect";
+		}
+	}
+
 }

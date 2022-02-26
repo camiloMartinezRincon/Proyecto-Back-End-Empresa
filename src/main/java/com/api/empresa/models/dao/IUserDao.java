@@ -6,4 +6,5 @@ import com.api.empresa.models.entity.User;
 
 public interface IUserDao extends CrudRepository<User, Long>{
 
+    User findByCorpUserEmail(String corpUserEmail);
 }

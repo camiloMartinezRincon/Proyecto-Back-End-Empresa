@@ -50,11 +50,11 @@ public class Project implements Serializable {
 
 	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "start_date", nullable = false)
-	private Date startDate;
+	private String startDate;
 
 	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "end_date", nullable = false)
-	private Date endDate;
+	private String endDate;
 
 	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "project_description", nullable = false)
@@ -124,19 +124,19 @@ public class Project implements Serializable {
 		this.clientEmail = clientEmail;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 

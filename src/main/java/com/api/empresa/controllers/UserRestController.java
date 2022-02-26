@@ -40,6 +40,17 @@ public class UserRestController {
 	public User createUser(@RequestBody User user) {
 		return userService.save(user);
 	}
+
+	@PostMapping("/authentication/user")
+	@ResponseStatus(HttpStatus.CREATED)
+	public HttpStatus autthenticateUser(@RequestBody User user) {
+		String response =  userService.authenticate(user.getCorpUserEmail(), user.getUserPassword());
+		if(response == "Correct"){
+			return HttpStatus.ACCEPTED;
+		}else{
+			return HttpStatus.BAD_REQUEST;
+		}
+	}
 	
 	@PutMapping("/user/update/info/{userId}")
 	@ResponseStatus(HttpStatus.CREATED)

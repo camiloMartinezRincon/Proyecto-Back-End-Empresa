@@ -42,6 +42,9 @@ public class Requirement implements Serializable {
 	@Column(name = "requirement_description", nullable = false)
 	private String requirementDescription;
 
+	@Column(name = "requerement_userEmail", nullable = true)
+	private String requerement_usermail;
+
 	public Long getRequirementId() {
 		return requirementId;
 	}
@@ -96,6 +99,12 @@ public class Requirement implements Serializable {
 
 	public void setRequirementDescription(String requirementDescription) {
 		this.requirementDescription = requirementDescription;
+	}
+	public String getRequerement_usermail() {
+		return requerement_usermail;
+	}
+	public void setRequerement_usermail(String requerement_usermail) {
+		this.requerement_usermail = requerement_usermail;
 	}
 
 	/**
