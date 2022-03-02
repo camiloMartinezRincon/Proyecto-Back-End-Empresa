@@ -1,5 +1,8 @@
 package com.api.empresa.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,6 +64,7 @@ public class Project implements Serializable {
 	private String projectDescription;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
 	private User user;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

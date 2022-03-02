@@ -2,6 +2,8 @@ package com.api.empresa.models.services;
 
 import java.util.List;
 
+import com.api.empresa.models.dao.IUserDao;
+import com.api.empresa.models.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,12 @@ public class ProjectServiceImpl implements IProjectService{
 
 	@Autowired
 	private IProjectDao projectDao;
+
+	@Autowired
+	private IUserService userService;
+
+	@Autowired
+	private EmailSenderService emailService;
 	
 	@Override
 	@Transactional
@@ -30,7 +38,17 @@ public class ProjectServiceImpl implements IProjectService{
 	@Override
 	@Transactional
 	public Project save(Project project) {
-		return projectDao.save(project);
+		/* User usertoAssociated = new User();
+		User userId = userService.findByCorpUserEmail(project.getClientEmail());
+		usertoAssociated.setUserId(userId.getUserId());
+		project.setUser(usertoAssociated);*/
+		Project created = new Project();
+				created = projectDao.save(project);
+		if(created.getProjectId() != null){
+			this.emailService.sendProjectMail(project);
+			return project;
+		}
+		return null;
 	}
 
 	@Override

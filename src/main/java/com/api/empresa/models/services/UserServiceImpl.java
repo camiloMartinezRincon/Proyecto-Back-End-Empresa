@@ -21,6 +21,12 @@ public class UserServiceImpl implements IUserService{
 	}
 
 	@Override
+	@Transactional(readOnly = true)
+	public User findByCorpUserEmail(String userEmail) {
+		return userDao.findByCorpUserEmail(userEmail);
+	}
+
+	@Override
 	@Transactional
 	public User save(User user) {
 		return userDao.save(user);

@@ -64,11 +64,10 @@ public class UserRestController {
 		return userService.save(currentUser);
 	}
 	
-	@PutMapping("/user/update/password/{userId}")
+	@PutMapping("/user/update/password")
 	@ResponseStatus(HttpStatus.CREATED)
-	public User updateUserPassword(@RequestBody User user, @PathVariable Long userId) {
-		User currentUserPassword = userService.findById(userId);
-		
+	public User updateUserPassword(@RequestBody User user) {
+		User currentUserPassword = userService.findByCorpUserEmail(user.getCorpUserEmail());
 		currentUserPassword.setUserPassword(user.getUserPassword());
 		
 		return userService.save(currentUserPassword);

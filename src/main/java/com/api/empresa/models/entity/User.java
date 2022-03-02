@@ -1,5 +1,7 @@
 package com.api.empresa.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,7 @@ public class User implements Serializable {
 	private List<ProjectDelivery> projectDeliveries;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user",cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<Project> projects;
 
 	public User() {

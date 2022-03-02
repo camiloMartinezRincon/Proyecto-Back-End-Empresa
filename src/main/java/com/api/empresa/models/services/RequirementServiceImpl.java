@@ -1,5 +1,6 @@
 package com.api.empresa.models.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,23 @@ public class RequirementServiceImpl implements IRequirementService{
 
 	@Autowired
 	private IRequirementDao requirementDao;
-	
+
+	@Autowired
+	private EmailSenderService emailService;
+
 	@Override
 	@Transactional
 	public List<Requirement> findAll() {
-		return (List<Requirement>) requirementDao.findAll();
+		List<Requirement> listObject= (List<Requirement>) requirementDao.findAll();
+		/*List<Requirement> listRequirement = new ArrayList<>();
+		for(int i=0; i<listObject.size(); i++){
+			Requirement requirement = listObject.get(i);
+			Sy
+			if(requirement.getRequerement_usermail() == userEmail){
+				listRequirement.add(requirement);
+			}
+		}*/
+		return listObject;
 	}
 
 	@Override
@@ -30,7 +43,13 @@ public class RequirementServiceImpl implements IRequirementService{
 	@Override
 	@Transactional
 	public Requirement save(Requirement requirement) {
-		return requirementDao.save(requirement);
+
+		Requirement created = requirementDao.save(requirement);
+		if(created.getRequirementId() != null){
+			this.emailService.sendRequirementMail(requirement);
+			return requirement;
+		}
+		return null;
 	}
 
 	@Override

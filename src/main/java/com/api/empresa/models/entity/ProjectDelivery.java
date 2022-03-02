@@ -3,12 +3,7 @@ package com.api.empresa.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -35,7 +30,7 @@ public class ProjectDelivery implements Serializable {
 
 	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "delivery_date", nullable = false)
-	private Date deliveryDate;
+	private String deliveryDate;
 
 	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "delivery_hour", nullable = false)
@@ -77,11 +72,11 @@ public class ProjectDelivery implements Serializable {
 		this.projectName = projectName;
 	}
 
-	public Date getDeliveryDate() {
+	public String getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(Date deliveryDate) {
+	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
