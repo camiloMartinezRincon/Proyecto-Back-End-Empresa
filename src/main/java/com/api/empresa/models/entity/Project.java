@@ -62,6 +62,9 @@ public class Project implements Serializable {
 	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "project_description", nullable = false)
 	private String projectDescription;
+	
+	@Column(name = "owner_mail", nullable = true)
+	private String ownerMail;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonBackReference
@@ -150,6 +153,14 @@ public class Project implements Serializable {
 
 	public void setProjectDescription(String projectDescription) {
 		this.projectDescription = projectDescription;
+	}
+
+	public String getOwnerMail() {
+		return ownerMail;
+	}
+
+	public void setOwnerMail(String ownerMail) {
+		this.ownerMail = ownerMail;
 	}
 
 	public User getUser() {

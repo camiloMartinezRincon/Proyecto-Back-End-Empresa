@@ -39,6 +39,9 @@ public class ProjectDelivery implements Serializable {
 	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "delivery_place", nullable = false)
 	private String deliveryPlace;
+	
+	@Column(name = "owner_mail", nullable = true)
+	private String ownerMail;
 
 	public Long getProjectDeliveryId() {
 		return projectDeliveryId;
@@ -94,6 +97,14 @@ public class ProjectDelivery implements Serializable {
 
 	public void setDeliveryPlace(String deliveryPlace) {
 		this.deliveryPlace = deliveryPlace;
+	}
+
+	public String getOwnerMail() {
+		return ownerMail;
+	}
+
+	public void setOwnerMail(String ownerMail) {
+		this.ownerMail = ownerMail;
 	}
 
 	/**

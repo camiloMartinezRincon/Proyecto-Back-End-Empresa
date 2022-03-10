@@ -43,6 +43,9 @@ public class User implements Serializable {
 	@NotEmpty(message = "No puede estar Vacio")
 	@Column(name = "user_password", nullable = false)
 	private String userPassword;
+	
+	@Column(name = "owner_mail", nullable = true)
+	private String ownerMail;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
@@ -104,6 +107,14 @@ public class User implements Serializable {
 
 	public List<Requirement> getRequirements() {
 		return requirements;
+	}
+
+	public String getOwnerMail() {
+		return ownerMail;
+	}
+
+	public void setOwnerMail(String ownerMail) {
+		this.ownerMail = ownerMail;
 	}
 
 	public void setRequirements(List<Requirement> requirements) {
