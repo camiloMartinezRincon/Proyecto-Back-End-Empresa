@@ -14,5 +14,5 @@ public interface IUserService {
 	public User save(User user);
 	public void delete(Long userId);
 
-    public String authenticate(String corpUserEmail, String userPassword);
+    public User authenticate(String corpUserEmail, String userPassword);
 }

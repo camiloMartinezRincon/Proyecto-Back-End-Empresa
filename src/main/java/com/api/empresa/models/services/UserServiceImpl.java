@@ -39,13 +39,13 @@ public class UserServiceImpl implements IUserService{
 	}
 
 	@java.lang.Override
-	public String authenticate(String corpUserEmail, String userPassword) {
+	public User authenticate(String corpUserEmail, String userPassword) {
 		User authenticatedUser = new User();
 		authenticatedUser = userDao.findByCorpUserEmail(corpUserEmail);
 		if(userPassword.equals(authenticatedUser.getUserPassword())){
-			return "Correct";
+			return authenticatedUser;
 		}else{
-			return "Incorrect";
+			return null;
 		}
 	}
 

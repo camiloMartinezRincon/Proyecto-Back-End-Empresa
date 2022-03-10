@@ -43,12 +43,12 @@ public class UserRestController {
 
 	@PostMapping("/authentication/user")
 	@ResponseStatus(HttpStatus.CREATED)
-	public HttpStatus autthenticateUser(@RequestBody User user) {
-		String response =  userService.authenticate(user.getCorpUserEmail(), user.getUserPassword());
-		if(response == "Correct"){
-			return HttpStatus.ACCEPTED;
+	public User autthenticateUser(@RequestBody User user) {
+		User response =  userService.authenticate(user.getCorpUserEmail(), user.getUserPassword());
+		if(response.getCorpUserEmail() != null){
+			return response;
 		}else{
-			return HttpStatus.BAD_REQUEST;
+			return null;
 		}
 	}
 	
