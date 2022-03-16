@@ -1,5 +1,6 @@
 package com.api.empresa.models.services;
 
+import com.api.empresa.models.entity.Cotizacion;
 import com.api.empresa.models.entity.Project;
 import com.api.empresa.models.entity.ProjectDelivery;
 import com.api.empresa.models.entity.Requirement;
@@ -58,6 +59,22 @@ public class EmailSenderService {
                 "\n Fecha inicio: "+project.getStartDate() +
                 "\n Fecha estimada de finalización: "+project.getEndDate()+
                 ""+ project.getRequirements());
+        this.javaMailSender.send(mailMessage);
+    }
+    
+    public void sendCotizacionMail(Cotizacion cotizacion) {
+        // Create the email for send
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(cotizacion.getCorpEmail());
+        mailMessage.setSubject("Cotizacion Creada!");
+        mailMessage.setFrom("nairobley@gmail.com");
+        mailMessage.setText("En hora buena, has creado una nueva cotizacion. Gracias por confiar en nosotros! \n"
+                +"** Detalles **\n"+
+                "Nombre del Cliente: "+ cotizacion.getClienteNombreApellido()+
+                "\n Tipo de Servicio: "+ cotizacion.getTipoServicio()+
+                "\n Descripción: " + cotizacion.getCotizacionDescripcion()+
+                "\n Fecha inicio: "+cotizacion.getFechaInicio() +
+                "\n Fecha estimada de Entrega: "+cotizacion.getFechaEntrega());
         this.javaMailSender.send(mailMessage);
     }
 }
