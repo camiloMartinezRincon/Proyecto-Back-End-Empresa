@@ -21,7 +21,7 @@ public class CatalogoServiciosRestController {
 	
 	@Autowired
 	private ICatalogoServiciosService catalogoServiciosService;
-	
+
 	@GetMapping("/catalogo/servicios/info")
 	public List<CatalogoServicios> allServices(){
 		return catalogoServiciosService.findAll();
@@ -36,5 +36,16 @@ public class CatalogoServiciosRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public CatalogoServicios createCatalogoServicios(@RequestBody CatalogoServicios catalogoServicios) {
 		return catalogoServiciosService.save(catalogoServicios);
+	}
+
+	@PostMapping("/portafolio/cotizacion")
+	@ResponseStatus(HttpStatus.CREATED)
+	public String createPortafolioCotizacion(@RequestBody List<CatalogoServicios> catalogoServicios) {
+		String response = catalogoServiciosService.portafilioCotiza(catalogoServicios);
+		if(response ==null){
+			return "ERROR";
+		}else{
+			return "ENVIADO";
+		}
 	}
 }

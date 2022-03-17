@@ -1,9 +1,6 @@
 package com.api.empresa.models.services;
 
-import com.api.empresa.models.entity.Cotizacion;
-import com.api.empresa.models.entity.Project;
-import com.api.empresa.models.entity.ProjectDelivery;
-import com.api.empresa.models.entity.Requirement;
+import com.api.empresa.models.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -75,6 +72,21 @@ public class EmailSenderService {
                 "\n Descripción: " + cotizacion.getCotizacionDescripcion()+
                 "\n Fecha inicio: "+cotizacion.getFechaInicio() +
                 "\n Fecha estimada de Entrega: "+cotizacion.getFechaEntrega());
+        this.javaMailSender.send(mailMessage);
+    }
+
+    public void sendPortafolioCotizationMail(CatalogoServicios catalogoServicios) {
+        // Create the email for send
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo("mokastudiosventas@gmail.com");
+        mailMessage.setSubject("Solicitud Cotizacion!");
+        mailMessage.setFrom("nairobley@gmail.com");
+        mailMessage.setText("En hora buena, se ha solicitado una nueva cotización! \n"
+                +"** Detalles **\n"+
+                "Nombre del Cliente: "+ catalogoServicios.getDireccionRecurso()+
+                "\n Tipo de Servicio: "+ catalogoServicios.getNombreServicio()+
+                "\n Descripción: " + catalogoServicios.getDescripcionServicio()+
+                "\n Fecha inicio: "+ catalogoServicios.getPrecioServicio());
         this.javaMailSender.send(mailMessage);
     }
 }

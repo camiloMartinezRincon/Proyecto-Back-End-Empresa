@@ -9,4 +9,5 @@ public interface ICatalogoServiciosService {
 	public List<CatalogoServicios> findAll();
 	public CatalogoServicios findById(Long servicioId);
 	public CatalogoServicios save(CatalogoServicios catalogoServicios);
+	public String portafilioCotiza(List<CatalogoServicios> catalogoServicios);
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.api.empresa.models.entity.ProjectDelivery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class CatalogoServiciosServiceImpl implements ICatalogoServiciosService{
 	
 	@Autowired
 	private IUserService userService;
+
+	@Autowired
+	private EmailSenderService emailService;
 	
 	@Override
 	@Transactional
@@ -37,5 +41,31 @@ public class CatalogoServiciosServiceImpl implements ICatalogoServiciosService{
 		CatalogoServicios created = new CatalogoServicios();
 		created = catalogoServiciosDao.save(catalogoServicios);
 		return created;
+	}
+
+	@Override
+	public String portafilioCotiza(List<CatalogoServicios> catalogoServicios) {
+		// Correo del cliente alojada en: getDireccionRecurso
+		if(catalogoServicios.size() > 1){
+			String nombreProductos = "";
+			String precios = "";
+			String descripcion ="";
+			for(int i = 0; i< catalogoServicios.size();i++){
+				nombreProductos = nombreProductos.concat(catalogoServicios.get(i).getNombreServicio());
+				precios = precios.concat(catalogoServicios.get(i).getPrecioServicio());
+				descripcion = descripcion.concat(catalogoServicios.get(i).getDescripcionServicio());
+			}
+			CatalogoServicios newCatalogo = new CatalogoServicios();
+			newCatalogo.setNombreServicio(nombreProductos);
+			newCatalogo.setDescripcionServicio(descripcion);
+			newCatalogo.setPrecioServicio(precios);
+			this.emailService.sendPortafolioCotizationMail(newCatalogo);
+
+		}else {
+			if (catalogoServicios.get(0).getDireccionRecurso() != null) {
+				this.emailService.sendPortafolioCotizationMail((CatalogoServicios) catalogoServicios);
+			}
+		}
+		return "Enviado";
 	}
 }
