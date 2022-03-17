@@ -51,14 +51,15 @@ public class CatalogoServiciosServiceImpl implements ICatalogoServiciosService{
 			String precios = "";
 			String descripcion ="";
 			for(int i = 0; i< catalogoServicios.size();i++){
-				nombreProductos = nombreProductos.concat(catalogoServicios.get(i).getNombreServicio());
-				precios = precios.concat(catalogoServicios.get(i).getPrecioServicio());
-				descripcion = descripcion.concat(catalogoServicios.get(i).getDescripcionServicio());
+				nombreProductos = nombreProductos.concat(catalogoServicios.get(i).getNombreServicio())+", ";
+				precios = precios.concat(catalogoServicios.get(i).getPrecioServicio())+", ";
+				descripcion = descripcion.concat(catalogoServicios.get(i).getDescripcionServicio())+", ";
 			}
 			CatalogoServicios newCatalogo = new CatalogoServicios();
 			newCatalogo.setNombreServicio(nombreProductos);
 			newCatalogo.setDescripcionServicio(descripcion);
 			newCatalogo.setPrecioServicio(precios);
+			newCatalogo.setDireccionRecurso(catalogoServicios.get(0).getDireccionRecurso());
 			this.emailService.sendPortafolioCotizationMail(newCatalogo);
 
 		}else {
