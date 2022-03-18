@@ -34,6 +34,17 @@ public class CatalogoServicios implements Serializable{
 	@Column(name = "direccion_recurso", nullable = false)
 	private String direccionRecurso;
 
+	@Column(name = "user", nullable = false)
+	private String user;
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
 	public Long getServicioId() {
 		return servicioId;
 	}

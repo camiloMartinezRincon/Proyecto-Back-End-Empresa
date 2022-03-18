@@ -46,7 +46,7 @@ public class CatalogoServiciosServiceImpl implements ICatalogoServiciosService{
 	@Override
 	public String portafilioCotiza(List<CatalogoServicios> catalogoServicios) {
 		// Correo del cliente alojada en: getDireccionRecurso
-		if(catalogoServicios.size() > 1){
+		if(catalogoServicios.size() > 0){
 			String nombreProductos = "";
 			String precios = "";
 			String descripcion ="";
@@ -59,13 +59,9 @@ public class CatalogoServiciosServiceImpl implements ICatalogoServiciosService{
 			newCatalogo.setNombreServicio(nombreProductos);
 			newCatalogo.setDescripcionServicio(descripcion);
 			newCatalogo.setPrecioServicio(precios);
-			newCatalogo.setDireccionRecurso(catalogoServicios.get(0).getDireccionRecurso());
+			newCatalogo.setUser(catalogoServicios.get(0).getUser());
 			this.emailService.sendPortafolioCotizationMail(newCatalogo);
 
-		}else {
-			if (catalogoServicios.get(0).getDireccionRecurso() != null) {
-				this.emailService.sendPortafolioCotizationMail((CatalogoServicios) catalogoServicios);
-			}
 		}
 		return "Enviado";
 	}

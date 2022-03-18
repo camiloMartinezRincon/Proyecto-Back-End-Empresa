@@ -40,12 +40,12 @@ public class CatalogoServiciosRestController {
 
 	@PostMapping("/portafolio/cotizacion")
 	@ResponseStatus(HttpStatus.CREATED)
-	public String createPortafolioCotizacion(@RequestBody List<CatalogoServicios> catalogoServicios) {
+	public Boolean createPortafolioCotizacion(@RequestBody List<CatalogoServicios> catalogoServicios) {
 		String response = catalogoServiciosService.portafilioCotiza(catalogoServicios);
 		if(response ==null){
-			return "ERROR";
+			return false;
 		}else{
-			return "ENVIADO";
+			return true;
 		}
 	}
 }

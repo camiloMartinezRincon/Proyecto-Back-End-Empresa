@@ -83,7 +83,7 @@ public class EmailSenderService {
         mailMessage.setFrom("nairobley@gmail.com");
         mailMessage.setText("En hora buena, se ha solicitado una nueva cotización! \n"
                 +"** Detalles **\n"+
-                "Nombre del Cliente: "+ catalogoServicios.getDireccionRecurso()+
+                "Nombre del Cliente: "+ catalogoServicios.getUser()+
                 "\n Tipo de Servicio: "+ catalogoServicios.getNombreServicio()+
                 "\n Descripción: " + catalogoServicios.getDescripcionServicio()+
                 "\n Fecha inicio: "+ catalogoServicios.getPrecioServicio());
